@@ -1,0 +1,74 @@
+<div class="box-header" style='text-align: center;'>
+    <h1 class="">Kontakt</h1>
+    <p style="font-style: italic; color: #999999;">Aby zmienić adres uzupełnij pola i wciśnij przycisk "zapisz"</p>
+</div>
+
+<form role="form" id="person" enctype="multipart/form-data">
+    <div class="col-md-6">
+
+        <input type="hidden" name="contactId" value="{{= it.data.id || ''}}">
+
+        <div class="form-group">
+            <label>Adres linia 1:</label>
+            <input type="text" class="form-control" placeholder="Np. Gabinet weterynaryjny: ..." name="address1" value="{{= it.data.address1 || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Adres linia 2:</label>
+            <input type="text" class="form-control" placeholder="Np. ul: Przykładowa 1 .." name="address2" value="{{= it.data.address2 || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Adres linia 3:</label>
+            <input type="text" class="form-control" placeholder="Np. 00-000 Przykład ..." name="address3" value="{{= it.data.address3 || ''}}">
+        </div>
+
+
+        <div class="form-group">
+            <label>Adres linia 4:</label>
+            <input type="text" class="form-control" placeholder="Np. 999-999-999" name="address4" value="{{= it.data.address4 || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Adres linia 5:</label>
+            <input type="text" class="form-control" placeholder="Np. maxvetplus@gmail.com...."name="address5" value="{{= it.data.address5 || ''}}">
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <input type="hidden" name="contactId" value="{{= it.data.id || ''}}">
+
+        <div class="form-group">
+            <label>Godziny linia 1:</label>
+            <input type="text" class="form-control" placeholder="Np. Godziny otwarcia: ..." name="open1" value="{{= it.data.open1 || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Godziny linia 2:</label>
+            <input type="text" class="form-control" placeholder="Np. Poniedziałek/Piątek: 0:00 – 0:00 .." name="open2" value="{{= it.data.open2 || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Godziny linia 3:</label>
+            <input type="text" class="form-control" placeholder="Np. Sobota: 0:00 – 0:00 ..." name="open3" value="{{= it.data.open3 || ''}}">
+        </div>
+
+
+        <div class="form-group">
+            <label>Godziny linia 4:</label>
+            <input type="text" class="form-control" placeholder="Np. Niedziela : 0:00 – 0:00" name="open4" value="{{= it.data.open4 || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Godziny linia 5:</label>
+            <input type="text" class="form-control" placeholder="Np. Tel. czynny całodobowo...."name="open5" value="{{= it.data.open5 || ''}}">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-block btn-primary save-form" method="POST">Zapisz</button>
+
+</form>
+
+
+

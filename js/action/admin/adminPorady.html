@@ -1,0 +1,73 @@
+<div class="col-xs-12">
+    <div class="box">
+        <div class="box-header" style='text-align: center;'>
+            <h1 class="">Lista kategorii</h1>
+            <p style="font-style: italic; color: #999999;">W tym miejscu można dodawać,edytować oraz usuwać kategorie sortowania w zakładce "Porady dla zwierząt"</p>
+            <button type="button" class="btn btn-block btn-success add-article-category">Dodaj nową kategorię</button>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover alignCenter">
+                <tbody>
+                    <tr>
+                        <th>ID nagłówka</th>
+                        <th>Treść</th> 
+                        <!--<th>Filtr</th>-->
+                        <th>Akcja</th>
+                    </tr>
+                    {{~it.data.cats: category}}
+                    <tr>
+                        <td>{{= category.id || ''}}</td>
+                        <td>{{= category.name || ''}}</td>
+                        <!--<td>{{= category.filter || ''}}</td>-->
+                        <td>
+                            <div class="btn-group" categoryId="{{= category.id}}">
+                                <button title='Edytuj' type="button" class="btn btn-primary category-edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button title='Usuń' type="button" class="btn btn-danger category-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{~}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="box">
+        <div class="box-header" style='text-align: center;'>
+            <h1 class="">Lista artykułów</h1>
+            <p style="font-style: italic; color: #999999;">W tym miejscu można dodawać,edytować oraz usuwać artykuły w zakładce "Porady dla zwierząt"</p>
+            <button type="button" class="btn btn-block btn-success add-article">Dodaj nowy artykuł</button>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover alignCenter">
+                <tbody>
+                    <tr>
+                        <th>Data dodania</th>
+                        <th>Tytuł</th> 
+                        <th>Podtytuł</th>
+                        <th>Kategoria</th>
+                        <th>Akcja</th>
+                    </tr>
+                    {{~it.data.articles: article}}
+                    <tr>
+                        <td>{{= article.date || ''}}</td>
+                        <td>{{= article.title || ''}}</td>
+                        <td>{{= article.subtitle || ''}}</td>
+                        <td>{{= article.categoryName || ''}}</td>
+                        <td>
+                            <div class="btn-group" articleId="{{= article.id}}">
+                                <button title='Edytuj' type="button" class="btn btn-primary article-edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button title='Usuń' type="button" class="btn btn-danger article-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{~}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

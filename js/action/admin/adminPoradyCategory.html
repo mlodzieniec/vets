@@ -1,0 +1,31 @@
+<div class="box-header" style='text-align: center;'>
+    <h1 class="">Kategoria</h1>
+    <p style="font-style: italic; color: #999999;">Dodawanie/edytowanie kategorii w zakładce "Porady dla zwierząt"</p>
+</div>
+
+<form role="form" id="articleCategory" enctype="multipart/form-data">
+    <div class="col-xs-12">
+        <input type="hidden" name="type" value="category">
+        <input type="hidden" name="categoryId" value="{{= it.data.id || ''}}">
+        
+        <div class="form-group">
+            <label>Nazwa kategorii:</label>
+            <input type="text" class="form-control" placeholder="Nazwa kategorii ..." name="name" value="{{= it.data.name || ''}}">
+        </div>
+        
+<!--        <div class="form-group">
+            <label>Filtr:</label>
+            <input type="text" class="form-control" placeholder="Nazwa filtra ..." name="filter" value="{{! it.data.filter || ''}}">
+        </div>-->
+
+
+        {{? typeof it.data.id !== "undefined"}}
+        <button type="submit" class="btn btn-block btn-primary save-form" method="POST">Zapisz</button>
+        {{??}}
+        <button type="submit" class="btn btn-block btn-success save-form" method="PUT">Dodaj kategorię</button>
+        {{?}}
+    </div>
+</form>
+
+
+

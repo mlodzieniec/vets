@@ -1,0 +1,110 @@
+<div class="box-header" style='text-align: center;'>
+    <h1 class="">Artykuł</h1>
+    <p style="font-style: italic; color: #999999;">Dodawanie/edytowanie artykułu w zakładce "Porady dla zwierząt"</p>
+</div>
+
+<form role="form" id="advice" enctype="multipart/form-data">
+    <div class="col-md-6">
+        <input type="hidden" name="type" value="article">
+        <input type="hidden" name="articleId" value="{{= it.data.singleArticle.id || ''}}">
+
+        <div class="form-group">
+            <label>Data:</label>
+            <div class="input-group date">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="datepicker" name="date" value="{{= it.data.singleArticle.date || ''}}" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Tytuł:</label>
+            <input type="text" class="form-control" placeholder="Tytuł ..." name="title" value="{{= it.data.singleArticle.title || ''}}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Podtytuł:</label>
+            <input type="text" class="form-control" placeholder="Podtytuł ..." name="subtitle" value="{{= it.data.singleArticle.subtitle || ''}}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Kategoria:</label>
+            <select class="form-control select2 select2-hidden-accessible" name="category">
+                <option value="0">-- wybierz kategorię --</option>
+                {{~it.data.cats: category}}
+                <option {{? it.data.singleArticle.category == category.id }}selected{{?}} value="{{= category.id}}">{{= category.name}}</option>
+                {{~}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Treść:</label>
+            <textarea name="content" id="editor1" rows="30" cols="80">
+                {{= it.data.singleArticle.content || ''}}
+            </textarea>
+        </div>
+    </div>
+        
+    <div class="col-md-6">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Zdjęcie główne:</label>  
+                <input type='file' id="main"/>
+                <img id="mainPhoto" src="{{= it.data.singleArticle.mainImage}}" alt="Zdjęcie główne" style="width:100%;max-width:300px;"/>
+                <input type='hidden' name='oldUploadName' value="{{= it.data.singleArticle.mainImage}}">
+                <input type='hidden' name='oldUploadId' value="{{= it.data.singleArticle.mainUploadId}}">
+            </div>
+        </div>
+    </div>
+
+    {{? typeof it.data.singleArticle.id !== "undefined"}}
+    <button type="submit" class="btn btn-block btn-primary save-form" method="POST">Zapisz</button>
+    {{??}}
+    <button type="submit" class="btn btn-block btn-success save-form" method="PUT">Dodaj Artykuł</button>
+    {{?}}
+</form>
+
+{{? typeof it.data.singleArticle.id !== "undefined"}}
+<div class="col-xs-12" style="margin-top: 40px;">
+    <div class="box">
+        <div class="box-header" style='text-align: center;'>
+            <h1 class="">Galeria artykułu</h1>
+            <p style="font-style: italic; color: #999999;">W tym miejscu można dodawać,edytować oraz usuwać zdjęcia z galerii "Porady dla zwierząt"</p>
+            <button type="button" class="btn btn-block btn-success add-upload">Dodaj nowe zdjęcie</button>
+        </div>
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover alignCenter">
+                <tbody>
+                    <tr>
+                        <th>ID zdjęcia</th>
+                        <th>Tytuł</th> 
+                        <th>Podtytuł</th>
+                        <th>Zdjęcie</th>
+                        <th>Akcja</th>
+                    </tr>
+                    {{~it.data.articleGallery: upload}}
+                    <tr>
+                        <td>{{= upload.id || ''}}</td>
+                        <td>{{= upload.title || ''}}</td>
+                        <td>{{= upload.subtitle || ''}}</td>
+                        <td>                
+                            <img id="mainPhoto" src="{{= upload.filename}}" alt="Zdjęcie" style="width:100%;max-width:200px;"/>
+                        </td>
+                        <td>
+                            <div class="btn-group" uploadId="{{= upload.id}}">
+                                <button title='Edytuj' type="button" class="btn btn-primary upload-edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button title='Usuń' type="button" class="btn btn-danger upload-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{~}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{{?}}
+

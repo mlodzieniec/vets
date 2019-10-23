@@ -1,0 +1,72 @@
+<div class="content-wrap" style="padding: 30px 0;">
+    <div id="articleContainer" class="container clearfix content-full-width">
+        <div class="heading-block fancy-title nobottomborder title-bottom-border">
+            <h3><span>{{= it.data.singleArticle.title}}</span></h3>
+            <p><b>{{= it.data.singleArticle.subtitle}}. {{= it.data.singleArticle.date}}  </b></p>
+            <!--<p><i class="fas fa-calendar"></i><?php echo $article['date'] . '. ' . $article['date']; ?></p>-->
+        </div>
+
+        <div class="" style="text-align: center;">
+            <a><img class="bigPhotoBorder" style="max-height: 550px;" src="{{=it.data.singleArticle.mainImage}}" alt="Photo"></a>
+        </div>
+
+        <div class="entry-content topmargin article-content" style="">
+            {{= it.data.singleArticle.content || ''}}
+
+            <div class="clear"></div>
+
+            <div style=" margin:auto; ">
+                <div style="float: right;">
+                    <a href="artykuly" action="Porady" class="button"><i class="fas fa-angle-double-right"></i>Więcej artykułów</a>
+                </div>
+
+                <div style="float: right; width: 124px;padding: 10px;">
+
+                    <div id="hideFbPageOnMobile" style="float: left;" class="fb-share-button" data-href="{{= window.location.href}}" data-layout="button" data-size="small"><a target="_blank" href="{{= window.location.href}}" class="fb-xfbml-parse-ignore">Udostępnij</a></div>  
+                </div>
+
+                <div style="float: right; width: 278px;padding: 10px;">
+                    <p  style="float:left;padding: 3px;"><b>Polub nas na facebook'u!</b></p>
+                    <div style="float: right; width: 94px !important;" class="fb-like" data-href="https://www.facebook.com/Gabinet-Weterynaryjny-Maxvet-Plus-Piotr-Paw&#x142;owski-349188355215960/?ref=br_rs" data-width="" data-layout="button" data-action="like" data-size="small" data-show-faces="true" data-share="false"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Zdjecia w artykule -->
+        <div class="col_full nobottommargin clearfix">
+            <div id="oc-portfolio" class="owl-carousel portfolio-carousel carousel-widget owl-loaded owl-drag" data-margin="20" data-nav="true" data-pagi="false" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-lg="4">
+                <div class="heading-block fancy-title nobottomborder title-bottom-border topmargin-lg">
+                    <h4><span>Z</span>djęcia</h4>
+                </div>
+
+                <div id="related-portfolio" class="owl-carousel portfolio-carousel carousel-widget owl-loaded owl-drag with-carousel-dots" data-margin="30" data-nav="false" data-autoplay="5000" data-items-xs="1" data-items-sm="2" data-items-md="3" data-items-xl="4">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage" style="transform: translate3d(-585px, 0px, 0px); transition: all 0.25s ease 0s; width: 2925px;">
+                            {{~ it.data.articleGallery : photo}}
+                            <div class="owl-item active" style="width: 262.5px; margin-right: 30px;"><div class="oc-item">
+                                    <div class="iportfolio">
+                                        <div class="portfolio-image smallPhotoBorder">
+                                            <a href="#">
+                                                <img src="{{=photo.filename}}" alt="Photo">
+                                            </a>
+                                            <div class="portfolio-overlay">
+                                                <a href="{{=photo.filename}}" class="left-icon" data-lightbox="image"><i class="fas fa-plus"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="portfolio-desc">
+                                            <h3><a href="#">{{= photo.title}}</a></h3>
+                                            <span><a href="#">{{= photo.subtitle}}</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{~}}    
+                        </div>                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script async crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v4.0"></script>

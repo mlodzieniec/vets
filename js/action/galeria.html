@@ -1,0 +1,27 @@
+<div class="content-wrap" style="padding: 30px 0;">
+    <div class="container clearfix content-full-width">
+        <div class="heading-block fancy-title nobottomborder title-bottom-border">
+            <h4>Galeria <span>zdjęć</span>.</h4>
+        </div>
+
+        <div align="center">
+            <button class="btn btn-default filter-button active" data-filter="*">Wszystkie</button>
+            {{~ it.data.galleries : gallery}}
+            <button class="btn btn-default filter-button" data-filter="{{=gallery.filterName || ''}}">{{=gallery.name}}<i class="{{=gallery.icon || ''}}"></i></button>
+            {{~}}
+        </div>
+
+        <div class="clear"></div>
+
+        <div class="gallery" style="text-align: center !important;">
+            {{~ it.data.uploads : upload}}
+            <a style="font-size: 0;"href="{{= upload.filename || ''}}" class="filter {{= upload.filterName || ''}}">
+                <img style="border: 1px solid #c5dada;" src="{{= upload.filename || ''}}" id="galleryPhoto" alt="" title="{{= upload.title || ''}}" class="img-shadows {{= upload.orientation || 'portrait'}}">
+            </a>
+            {{~}}
+        </div>
+    </div>
+</div>
+
+
+

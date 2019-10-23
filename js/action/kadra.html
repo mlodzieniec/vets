@@ -1,0 +1,54 @@
+<div class="content-wrap" style="padding: 30px 0;">
+    <div id="personContainer" class="container clearfix content-full-width" style="">
+        <div class="row" style="margin:0;"> 
+            <div id="firstAni" class="col_full" style="margin-bottom: 0px !important;">
+                <div class="heading-block fancy-title nobottomborder title-bottom-border">
+                    <h4>Nasi <span>lekarze</span>.</h4>
+                </div>
+            </div>
+            <div id="firstAni" class="row" id="teamMembersContent" style="">
+            {{~it.persons.vet : vetPerson}}
+                <div class="col-lg-6 bottommargin" 
+                     style="/*background-image: url(images/qwerty1.jpg);background-size: cover;background-attachment: fixed; */  padding: 0px;margin-bottom: 5px!important;">
+                    <div class="team team-list clearfix">
+                        <div class="team-image">
+                            <a personId="{{= vetPerson.id}}" href=""><img personId="{{= vetPerson.id}}" class="bigPhotoBorder" id="personPhoto" src="{{= vetPerson.personNormalImage}}" alt="{{= vetPerson.firstName}} {{= vetPerson.lastName}}"></a>
+                        </div>
+                        <div class="team-desc">
+                            <div class="team-title personThumbnailInfo"><h4 style="text-align: center;">{{= vetPerson.firstName}} {{= vetPerson.lastName}}</h4><span style="text-align: center;">{{= vetPerson.title}}</span></div>
+                            <div class="team-content">
+                                <p style="text-align: center;">{{= vetPerson.specialization}}</p>
+                                <p style="text-align: center;"><a personId="{{= vetPerson.id}}" style="font-size: 15px;font-weight: 700;" href="">Dowiedz się więcej!</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{~}}
+            </div>
+            <div id="secondAni" class="col_full" style="margin-bottom: 0px !important;">
+                <div class="heading-block fancy-title nobottomborder title-bottom-border">
+                    <h4>Nasi <span>pomocnicy</span>.</h4>
+                </div>
+            </div>
+            <div id="secondAni" class="row" id="teamMembersContent2">
+            {{~it.persons.other : otherPerson}}
+                <div class="col-lg-6 bottommargin">
+                    <div class="team team-list clearfix">
+                        <div class="team-image">
+                            <img class="bigPhotoBorder" id="personPhoto" src="{{= otherPerson.personNormalImage}}" alt="{{= otherPerson.firstName}} {{= otherPerson.lastName}}">
+                        </div>
+                        <div class="team-desc">
+                            <div class="team-title personThumbnailInfo"><h4 style="text-align: center;">{{= otherPerson.firstName}} {{= otherPerson.lastName}}</h4><span style="text-align: center;">{{= otherPerson.title}}</span></div>
+                            <div class="team-content">
+                                <p style="text-align: center;">{{= otherPerson.specialization}}</p>
+                                <p style="text-align: center;"><a personId="{{= otherPerson.id}}" style="font-size: 15px;font-weight: 700;" href="">Dowiedz się więcej!</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{~}}
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,97 @@
+<div class="content-wrap" style="padding:30px 0px;">
+    <div class="container clearfix content-full-width">
+
+        <div id="firstAni" class="col_full">
+            <div class="heading-block fancy-title nobottomborder title-bottom-border">
+                <h3 style="text-align: center;">Godziny pracy<span> lekarzy</span>.</h3>
+            </div>
+        </div>
+
+        <div id="firstAni">
+            <div class="limiter">
+                <div class="container-table100">
+                    <div class="wrap-table100">
+                        <div class="table100">
+                            <table>
+                                <thead>
+                                    <tr class="table100-head">
+                                        <th class="column1">Lekarz</th>
+                                        <th class="column2">Poniedziałek</th>
+                                        <th class="column3">Wtorek</th>
+                                        <th class="column4">środa</th>
+                                        <th class="column5">Czwartek</th>
+                                        <th class="column6">Piątek</th>
+                                        <th class="column7">Sobota</th>
+                                        <th class="column8">Niedziela</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{~ it.data.vet : vet}}
+                                    <tr>
+                                        <td class="column1"><b><span style="color:#1b307a;">{{= vet.title || ''}}</span> {{= vet.firstName || ''}} {{= vet.middleName || ''}} {{= vet.lastName || ''}}</b></td>
+                                        <td class="column2">{{= vet.mondayHours || ''}}</td>
+                                        <td class="column3">{{= vet.tuesdayHours || ''}}</td>
+                                        <td class="column4">{{= vet.wednesdayHours || ''}}</td>
+                                        <td class="column5">{{= vet.thursdayHours || ''}}</td>
+                                        <td class="column6">{{= vet.fridayHours || ''}}</td>
+                                        <td class="column7">{{= vet.saturdayHours || ''}}</td>
+                                        <td class="column8">{{= vet.sundayHours || ''}}</td>
+                                    </tr>
+                                    {{~}}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="secondAni" class="col_full" style="padding-top: 30px;">
+            <div class="heading-block fancy-title nobottomborder title-bottom-border">
+                <h3 style="text-align: center;">Godziny pracy<span> pomocników</span>.</h3>
+            </div>
+        </div>
+
+        <div id="secondAni">
+            <div class="limiter">
+                <div class="container-table100">
+                    <div class="wrap-table100">
+                        <div class="table100">
+                            <table>
+                                <thead>
+                                    <tr class="table100-head">
+                                        <th class="column1">Pomoc</th>
+                                        <th class="column2">Poniedziałek</th>
+                                        <th class="column3">Wtorek</th>
+                                        <th class="column4">środa</th>
+                                        <th class="column5">Czwartek</th>
+                                        <th class="column6">Piątek</th>
+                                        <th class="column7">Sobota</th>
+                                        <th class="column8">Niedziela</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{~ it.data.other : other}}
+                                    <tr>
+                                        <td class="column1"><b><span style="color:#1b307a;">{{= other.title || ''}}</span> {{= other.firstName || ''}} {{= other.middleName || ''}} {{= other.lastName || ''}}</b></td>
+                                        <td class="column2">{{= other.mondayHours || ''}}</td>
+                                        <td class="column3">{{= other.tuesdayHours || ''}}</td>
+                                        <td class="column4">{{= other.wednesdayHours || ''}}</td>
+                                        <td class="column5">{{= other.thursdayHours || ''}}</td>
+                                        <td class="column6">{{= other.fridayHours || ''}}</td>
+                                        <td class="column7">{{= other.saturdayHours || ''}}</td>
+                                        <td class="column8">{{= other.sundayHours || ''}}</td>
+                                    </tr>
+                                    {{~}}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

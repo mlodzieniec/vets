@@ -1,0 +1,23 @@
+<div class="container clearfix bottommargin-sm content-full-width" style="background-color: white;border: 1px solid rgba(0,0,0,.125);border-radius: .25rem;padding: 25px;margin-top: 30px;text-align: center;"> 
+
+    <div  class="row align-items-stretch clearfix" style="margin:0px;">
+        <div id="firstAni" class="col-md-4 col-padding" style="background: url('{{= it.person.personNormalImage}}') center center no-repeat;background-size: 100%;max-width: 340px;height: 600px;"></div>
+        <div id="secondAni" class="col-md-8" style="text-align: left;">
+            <div>
+                <div class="col_full">
+                    <div class="heading-block fancy-title nobottomborder title-bottom-border">
+                        <span class="specialization-person">{{= it.person.title  || ''}} {{? it.person.specialization !== '---'}}- {{= it.person.specialization || ''}}{{??}}{{?}} </span>
+                        <h3>{{= it.person.firstName || ''}} {{= it.person.middleName  || ''}} <span>{{= it.person.lastName  || ''}}</span></h3>
+                    </div>
+                </div>
+
+                <div class="row clearfix">
+                    <div class="col-lg-12 normalLineHeight">
+                        {{= it.person.personInfo}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

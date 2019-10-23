@@ -1,0 +1,73 @@
+<div class="col-xs-12">
+    <div class="box">
+        <div class="box-header" style='text-align: center;'>
+            <h1 class="">Lista nagłówków</h1>
+            <p style="font-style: italic; color: #999999;">W tym miejscu można dodawać,edytować oraz usuwać nagłówki w zakładce "Zwierzęta towarzyszące"</p>
+            <button type="button" class="btn btn-block btn-success add-small-category">Dodaj nowy nagłówek</button>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover alignCenter">
+                <tbody>
+                    <tr>
+                        <th>ID nagłówka</th>
+                        <th>Treść</th> 
+                        <th>Kolejność animacji</th>
+                        <th>Akcja</th>
+                    </tr>
+                    {{~it.data.categories: category}}
+                    <tr>
+                        <td>{{= category.id || ''}}</td>
+                        <td>{{= category.name || ''}}</td>
+                        <td>{{= category.animationQueue || ''}}</td>
+                        <td>
+                            <div class="btn-group" categoryId="{{= category.id}}">
+                                <button title='Edytuj' type="button" class="btn btn-primary category-edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button title='Usuń' type="button" class="btn btn-danger category-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{~}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="box">
+        <div class="box-header" style='text-align: center;'>
+            <h1 class="">Lista pozycji</h1>
+            <p style="font-style: italic; color: #999999;">W tym miejscu można dodawać,edytować oraz usuwać treść przypisaną do nagłówków w zakładce "Zwierzęta towarzyszące"</p>
+            <button type="button" class="btn btn-block btn-success add-small-service">Dodaj nową pozycję</button>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover alignCenter">
+                <tbody>
+                    <tr>
+                        <th>ID pozycji</th>
+                        <th>Nagłówek</th> 
+                        <th>Treść</th>
+                        <th>Dodatkowe informacje</th>
+                        <th>Akcja</th>
+                    </tr>
+                    {{~it.data.services: service}}
+                    <tr>
+                        <td>{{= service.id}}</td>
+                        <td>{{= service.name}}</td>
+                        <td>{{= service.content}}</td>
+                        <td style="text-align: left !important;">{{= service.additional}}</td>
+                        <td>
+                            <div class="btn-group" serviceId="{{= service.id}}">
+                                <button title='Edytuj' type="button" class="btn btn-primary service-edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button title='Usuń' type="button" class="btn btn-danger service-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{~}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

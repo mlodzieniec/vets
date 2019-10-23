@@ -1,0 +1,37 @@
+<div class="box-header" style='text-align: center;'>
+    <h1 class="">Nagłówek</h1>
+    <p style="font-style: italic; color: #999999;">Dodawanie/edytowanie nagłówków w zakładce "Zwierzęta gospodarskie"</p>
+</div>
+
+<form role="form" id="smallServiceCategory" enctype="multipart/form-data">
+    <div class="col-xs-12">
+        <input type="hidden" name="type" value="category">
+        <input type="hidden" name="categoryId" value="{{= it.data.id || ''}}">
+
+        <div class="form-group">
+            <label>Treść:</label>
+            <input type="text" class="form-control" placeholder="Treść ..." name="name" value="{{= it.data.name || ''}}">
+        </div>
+
+        <div  class="form-group">
+            <label>Kolejność animacji:</label>
+            <select class="form-control select2 select2-hidden-accessible" name="animationQueue">
+                <option {{? it.data.animationQueue == 'firstAni' }}selected{{?}} value="firstAni">1</option>
+                <option {{? it.data.animationQueue == 'secondAni' }}selected{{?}} value="secondAni">2</option>
+                <option {{? it.data.animationQueue == 'thirdAni' }}selected{{?}} value="thirdAni">3</option>
+                <option {{? it.data.animationQueue == 'fourthAni' }}selected{{?}} value="fourthAni">4</option>
+                <option {{? it.data.animationQueue == 'fifthAni' }}selected{{?}} value="fifthAni">5</option>
+                <option {{? it.data.animationQueue == 'sixthAni' }}selected{{?}} value="sixthAni">6</option>
+            </select>
+        </div>
+
+        {{? typeof it.data.id !== "undefined"}}
+        <button type="submit" class="btn btn-block btn-primary save-form" method="POST">Zapisz</button>
+        {{??}}
+        <button type="submit" class="btn btn-block btn-success save-form" method="PUT">Dodaj nagłówek</button>
+        {{?}}
+    </div>
+</form>
+
+
+

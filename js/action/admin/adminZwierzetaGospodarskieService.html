@@ -1,0 +1,41 @@
+<div class="box-header" style='text-align: center;'>
+    <h1 class="">Pozycje</h1>
+    <p style="font-style: italic; color: #999999;">Dodawanie/edytowanie pozycji w zakładce "Zwierzęta gospodarskie"</p>
+</div>
+
+<form role="form" id="smallService" enctype="multipart/form-data">
+    <div class="col-xs-12">
+        <input type="hidden" name="type" value="service">
+        <input type="hidden" name="serviceId" value="{{= it.data.services.id || ''}}">
+
+        <div  class="form-group">
+            <label>Nagłówek:</label>
+            <select class="form-control select2 select2-hidden-accessible" name="servicesBigPetsCategoryId">
+                {{~it.data.categories: category}}
+                <option {{? it.data.services.servicesBigPetsCategoryId == category.id }}selected{{?}} value="{{= category.id}}">{{= category.name}}</option>
+                {{~}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Treść:</label>
+            <input type="text" class="form-control" placeholder="Treść ..." name="content" value="{{= it.data.services.content || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Dodatkowe informacje:</label>
+            <textarea name="additional" id="editor1" rows="30" cols="80">
+                {{= it.data.services.additional || ''}}
+            </textarea>
+        </div>
+
+        {{? typeof it.data.services.id !== "undefined"}}
+        <button type="submit" class="btn btn-block btn-primary save-form" method="POST">Zapisz</button>
+        {{??}}
+        <button type="submit" class="btn btn-block btn-success save-form" method="PUT">Dodaj pozycję</button>
+        {{?}}
+    </div>
+</form>
+
+
+

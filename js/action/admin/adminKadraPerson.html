@@ -1,0 +1,74 @@
+<form role="form" id="person" enctype="multipart/form-data" runat="server">
+    <div class="col-md-6">
+        <input type="hidden" name="personId" value="{{= it.data.id || ''}}">
+
+        <div class="form-group">
+            <label>Imię:</label>
+            <input type="text" class="form-control" placeholder="Imię ..." name="firstName" value="{{= it.data.firstName || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Drugie imię:</label>
+            <input type="text" class="form-control" placeholder="Drugie imię ..." name="middleName" value="{{= it.data.middleName || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Nazwisko:</label>
+            <input type="text" class="form-control" placeholder="Nazwisko ..." name="lastName" value="{{= it.data.lastName || ''}}">
+        </div>
+
+        <div  class="form-group">
+            <label>Typ pracownika:</label>
+            <select class="form-control select2 select2-hidden-accessible" name="type">
+                <option {{? it.data.type == 'lekarz' }}selected{{?}} value="lekarz">Lekarz</option>
+                <option {{? it.data.type == 'pomocnik' }}selected{{?}} value="pomocnik">Pomocnik</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Tytuł:</label>
+            <input type="text" class="form-control" placeholder="Tytuł ..." name="title" value="{{= it.data.title || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Specjalizacja:</label>
+            <input type="text" class="form-control" placeholder="Specjalizacja ..."name="specialization" value="{{= it.data.specialization || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>Zainteresowania:</label>
+            <input type="text" class="form-control" placeholder="Zainteresowania ..." name="interests" value="{{= it.data.interests || ''}}">
+        </div>
+
+        <div class="form-group">
+            <label>O lekarzu:</label>
+            <textarea class="form-control" placeholder="O lekarzu ..." rows="5" name="personInfo">{{= it.data.personInfo || ''}}</textarea>
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Zdjęcie:</label>  
+            <input type='file' id="main"/>
+            <img id="mainPhoto" src="{{= it.data.personNormalImage}}" alt="Zdjęcie osoby" style="width:100%;min-width:200px;max-width:200px;"/>
+            <input type='hidden' name='oldMain' value="{{= it.data.personNormalImage}}">
+        </div>
+    </div>
+
+<!--    <div class="col-md-6">
+        <div class="form-group">
+            <label>Zdjęcie z listy pracowników:</label>  
+            <input type='file' id="thumbnail"/>
+            <img id="thumbnailPhoto" src="{{= it.data.personThumbnailImage}}" alt="Zdjęcie podglądowe" style="width:100%;min-width:200px;max-width:200px;"/>
+            <input type='hidden' name='oldThumbnail' value="{{= it.data.personThumbnailImage}}">
+        </div>
+    </div>-->
+
+    {{? typeof it.data.id !== "undefined"}}
+    <button type="submit" class="btn btn-block btn-primary save-form" method="POST">Zapisz</button>
+    {{??}}
+    <button type="submit" class="btn btn-block btn-success save-form" method="PUT">Dodaj osobę</button>
+    {{?}}
+
+</form>

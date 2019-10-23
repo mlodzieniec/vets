@@ -1,0 +1,42 @@
+<div class="col-xs-12">
+    <div class="box">
+        <div class="box-header" style='text-align: center;'>
+            <h1 class="">Lista pracowników</h1>
+            <p style="font-style: italic; color: #999999;">W tym miejscu można dodawać,edytować oraz usuwać pracowników z zakładki "Kadra"</p>
+            <button type="button" class="btn btn-block btn-success add-person">Dodaj nowego pracownika</button>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover alignCenter">
+                <tbody>
+                    <tr>
+                        <th>ID osoby</th>
+                        <th>Imiona</th>
+                        <th>Nazwisko</th>
+                        <th>Typ</th>
+                        <th>Tytuł</th>
+                        <th>Specjalizacja</th>
+                        <th>Akcja</th>
+                    </tr>
+                    {{~it.data: person}}
+                    <tr>
+                        <td>{{= person.id}}</td>
+                        <td>{{= person.firstName}} {{= person.middleName}}</td>
+                        <td>{{= person.lastName}}</td>
+                        <td>{{= person.type}}</td>
+                        <td>{{= person.title}}</td>
+                        <td>{{= person.specialization}}</td>
+                        <td>
+                            <div class="btn-group" personId="{{= person.id}}">
+                                <button title='Edytuj' type="button" class="btn btn-primary edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button title='Usuń' type="button" class="btn btn-danger delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{~}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

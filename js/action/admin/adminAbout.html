@@ -1,0 +1,62 @@
+<div class="box-header" style='text-align: center;'>
+    <h1 style="margin-top: 0;">O nas</h1>
+    <p style="font-style: italic; color: #999999;">W tym miejscu można edytować treść z zakładki "O nas"</p>
+</div>
+
+<form role="form" enctype="multipart/form-data">
+    <input type="hidden" name="type" value="about">
+    <input type="hidden" name="aboutId" value="{{= it.data.aboutContent.id || ''}}">
+    
+    <textarea name="content" id="editor1" rows="20" cols="80">
+        {{= it.data.aboutContent.content}}
+    </textarea>
+
+    <button type="submit" class="btn btn-block btn-primary save-form" method="POST">Zapisz</button>
+</form>
+
+{{? typeof it.data.aboutContent.id !== "undefined"}}
+<div class="col-xs-12" style="margin-top: 40px;">
+    <div class="box">
+        <div class="box-header" style='text-align: center;'>
+            <h1 class="">Galeria "O nas"</h1>
+            <p style="font-style: italic; color: #999999;">W tym miejscu można dodawać,edytować oraz usuwać zdjęcia za zakładki "O nas"</p>
+            <button type="button" class="btn btn-block btn-success add-upload">Dodaj nowe zdjęcie</button>
+        </div>
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover alignCenter">
+                <tbody>
+                    <tr>
+                        <th>ID zdjęcia</th>
+                        <th>Tytuł</th> 
+                        <th>Podtytuł</th>
+                        <th>Zdjęcie</th>
+                        <th>Akcja</th>
+                    </tr>
+                    {{~it.data.uploads: upload}}
+                    <tr>
+                        <td>{{= upload.id || ''}}</td>
+                        <td>{{= upload.title || ''}}</td>
+                        <td>{{= upload.subtitle || ''}}</td>
+                        <td>                
+                            <img id="mainPhoto" src="{{= upload.filename}}" alt="Zdjęcie" style="width:100%;max-width:200px;"/>
+                        </td>
+                        <td>
+                            <div class="btn-group" uploadId="{{= upload.id}}">
+                                <button title='Edytuj' type="button" class="btn btn-primary upload-edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button title='Usuń' type="button" class="btn btn-danger upload-delete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{~}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{{?}}
+
+<script>
+
+</script>

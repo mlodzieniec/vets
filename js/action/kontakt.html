@@ -1,0 +1,43 @@
+<div class="content-wrap" style="padding: 30px 0">
+    <div class="container clearfix content-full-width">
+
+        <div class="col_full">
+            <div class="heading-block fancy-title nobottomborder title-bottom-border">
+                <h4>Skontaktuj się <span>z nami</span>.</h4>
+            </div>
+        </div>
+
+        {{~ it.data : contact}}
+        <div id="{{= contact.animation || ''}}" class="row">
+            <div id="map" class="col-lg-6 bottommargin">
+                <iframe src="{{= contact.map || ''}}" width="100%" height="240px" frameborder="0" style="border:0" allowfullscreen></iframe>            
+            </div>
+            <div class="col-lg-6 contact-text-size">
+
+                <div class="col_half" style="text-align: center; margin-right: 0 !important;">
+                    <address>
+                        <strong>{{= contact.address1 || ''}}</strong><br>
+                        {{= contact.address2 || ''}}<br>
+                        {{= contact.address3 || ''}}<br>
+                        <strong>Telefon:</strong> {{= contact.address4 || ''}}<br>
+                        <strong>E-mail:</strong> {{= contact.address5 || ''}}<br>
+                    </address>
+                </div>
+
+                <div class="col_half col_last" style="text-align: center; margin-right: 0 !important;">
+                    <address>
+                        <strong>{{= contact.open1 || ''}}</strong><br>
+                        {{= contact.open2 || ''}}<br>
+                        {{= contact.open3 || ''}}<br>
+                        {{= contact.open4 || ''}}<br>
+                        {{= contact.open5 || ''}}
+                    </address>
+                </div>
+            </div>
+        </div>
+        {{~}}
+
+    </div>
+</div>
+
+<div class="clear"></div>

@@ -1,0 +1,36 @@
+<div class="box-header" style='text-align: center;'>
+    <h1 class="">Zdjęcie do galerii</h1>
+    <p style="font-style: italic; color: #999999;">Dodawanie/edytowanie zdjęć w galerii</p>
+</div>
+
+<form role="form" id="" enctype="multipart/form-data">
+    <div class="col-md-6">
+        <input type="hidden" name="type" value="upload">
+        <input type="hidden" name="uploadId" value="{{= it.data.upload.id || ''}}">
+        <input type="hidden" name="galleryId" value="{{= it.data.galleryId || ''}}">
+
+        <div class="form-group">
+            <label>Tytuł:</label>
+            <input type="text" class="form-control" placeholder="Tytuł zdjęcia ..." name="title" value="{{= it.data.upload.title || ''}}">
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Zdjęcie</label>  
+            <input type='file' id="main"/>
+            <img id="mainPhoto" src="{{= it.data.upload.filename}}" alt="Zdjęcie do galerii" style="width:100%;max-width:250px;"/>
+            <input type='hidden' name='oldMain' value="{{= it.data.upload.filename}}">
+        </div>
+    </div>
+
+    {{? typeof it.data.upload.id !== "undefined"}}
+    <button type="submit" class="btn btn-block btn-primary save-form" method="POST">Zapisz</button>
+    {{??}}
+    <button type="submit" class="btn btn-block btn-success save-form" method="PUT">Dodaj zdjęcie</button>
+    {{?}}
+</form>
+
+
+

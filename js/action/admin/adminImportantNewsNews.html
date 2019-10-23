@@ -1,0 +1,34 @@
+
+<div class="box-header" style='text-align: center;'>
+    <h1 style="margin-top: 0;">Baner</h1>
+    <p style="font-style: italic; color: #999999;">W tym miejscu można dodawać/edytować wiadomości wyświetlane na stronie głównej w górnym banerze</p>
+</div>
+
+<form>
+    <div class="col-xs-12">
+        <input type="hidden" name="id" value="{{= it.data.id || ''}}">
+
+        <div class="form-group">
+            <label>Data:</label>
+            <div class="input-group date">
+                <div class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </div>
+                <input type="text" class="form-control pull-right" id="datepicker" name="date" value="{{= it.data.date || ''}}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Treść:</label>
+            <textarea name="content" id="editor1" rows="1" cols="80">
+        {{= it.data.content || ''}}
+            </textarea>
+        </div>
+
+        {{? typeof it.data.id !== "undefined"}}
+        <button type="submit" class="btn btn-block btn-primary save-form" method="POST">Zapisz</button>
+        {{??}}
+        <button type="submit" class="btn btn-block btn-success save-form" method="PUT">Dodaj wiadomość</button>
+        {{?}}
+    </div>
+</form>
