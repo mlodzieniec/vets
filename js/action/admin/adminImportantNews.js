@@ -52,14 +52,11 @@ showNewsId = (id) => {
         return core.compileLayout('/action/admin/adminImportantNewsNews.html', $(document).find('section[id="content"]'), {data: JSON.parse(result.response)});
     }).then(() => {
         $("#datepicker").datepicker({format: 'yyyy-mm-dd'});
-
-        CKEDITOR.config.height = 60;
-        CKEDITOR.replace('editor1');
+        
+        let validation = new validateAdminImportantNews();
 
         $('form').on('submit', function (e) {
             e.preventDefault();
-
-            CKEDITOR.instances.editor1.updateElement();
 
             var $form = $('form');
             var data = core.getFormData($form);

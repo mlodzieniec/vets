@@ -210,36 +210,38 @@
         <script src="js/core.js"></script>
         <script src="js/functions.js"></script>
         <script>
-            let core = new Core();
-            $(document).on('core.route.success', (obj, response) => {
-                core.addJs(core.getActionUrl());
-                // if ( typeof load === 'function' ) {
-                //     load();
-                // }
-                //window.location.pathname.split("/");
-            });
+                                            let core = new Core();
+                                            $(document).on('core.route.success', (obj, response) => {
+                                                core.addJs(core.getActionUrl());
+                                                // if ( typeof load === 'function' ) {
+                                                //     load();
+                                                // }
+                                                //window.location.pathname.split("/");
+                                            });
 
-            $(document).on('core.route.error', (obj, response) => {
+                                            $(document).on('core.route.error', (obj, response) => {
 
-            });
-            $('#fixed-phone').hover(function () {
-                $('#xxx').addClass('qweasd');
-            }, function () {
-                $('#xxx').removeClass('qweasd');
-                
-            });
+                                            });
+                                            $('#fixed-phone').hover(function () {
+                                                $('#xxx').addClass('qweasd');
+                                            }, function () {
+                                                $('#xxx').removeClass('qweasd');
+                                                
+                                            });
 //          core.officeModal();
-            core.newRoute();
+                                            core.newRoute();
 
-            core.makeXhr({
-                method: 'GET',
-                url: 'api/main'
-            }).then((result) => {
-                let data = JSON.parse(result.response);
-                data.importantNews.forEach(function (news) {
-                    $(document).find('.importantNewsSlider').append(`<div class='slide' style='width: 1450px !important; margin-right: 0px; float: left; display: block;' aria-hidden='true'>${news.content}</div>`);
-                });
-            });
+                                            core.makeXhr({
+                                                method: 'GET',
+                                                url: 'api/main'
+                                            }).then((result) => {
+                                                let data = JSON.parse(result.response);
+                                                data.importantNews.forEach(function (news) {
+                                                    $(document).find('.importantNewsSlider').append(`<div class='slide' style='width: 1450px !important; margin-right: 0px; float: left; display: block;' aria-hidden='true'>${news.content}</div>`);
+                                                });
+                                            });
+
+
 
         </script>
 

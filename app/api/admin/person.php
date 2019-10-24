@@ -32,27 +32,21 @@ class person extends mainApi {
     public function putMethod($data) {
         if ($data) {
             if ((isset($data['mainPhotoType'])) && ($data['mainPhotoType'] == 'image/jpeg' || $data['mainPhotoType'] == 'image/png')) {
-                parent::base64_to_jpeg($data['mainPhotoBase'],
-                        $_SERVER['DOCUMENT_ROOT'] . "/uploads/person/" . $data['mainPhotoName']);
+                $src = $_SERVER['DOCUMENT_ROOT'] . "/uploads/person/" . $data['mainPhotoName'];
+
+
+                parent::base64_to_jpeg($data['mainPhotoBase'], $_SERVER['DOCUMENT_ROOT'] . "/uploads/person/" . $data['mainPhotoName']);
+
+                parent::cropImage($src, $data['mainPhotoName'], $data['mainPhotoType'], $data['cropScale'], $data['cropX'], $data['cropY'], $data['cropW'], $data['cropH']);
             }
 
-            if ((isset($data['thumbnailPhotoType'])) && ($data['thumbnailPhotoType'] == 'image/jpeg' || $data['thumbnailPhotoType'] == 'image/png')) {
-                parent::base64_to_jpeg($data['thumbnailPhotoBase'],
-                        $_SERVER['DOCUMENT_ROOT'] . "/uploads/person/" . $data['thumbnailPhotoName']);
-            }
-
-            $data['personNormalImage']    = '';
-            $data['personThumbnailImage'] = '';
+            $data['personNormalImage'] = '';
             if (isset($data['mainPhotoName'])) {
                 $data['personNormalImage'] = parent::pathToUploadIfExists($directory = 'person', $data['mainPhotoName']);
             }
 
-            if (isset($data['thumbnailPhotoName'])) {
-                $data['personThumbnailImage'] = parent::pathToUploadIfExists($directory = 'person', $data['thumbnailPhotoName']);
-            }
-
             $personPutStatement = $this->pdo->prepare(
-                    "INSERT INTO person (firstName, middleName, lastName, type, title, specialization, interests, personInfo, personNormalImage, personThumbnailImage) VALUES (?,?,?,?,?,?,?,?,?,?)");
+                    "INSERT INTO person (firstName, middleName, lastName, type, title, specialization, interests, personInfo, personNormalImage) VALUES (?,?,?,?,?,?,?,?,?)");
 
             if ($personPutStatement->execute([
                         $data['firstName'],
@@ -63,8 +57,7 @@ class person extends mainApi {
                         $data['specialization'],
                         $data['interests'],
                         $data['personInfo'],
-                        $data['personNormalImage'],
-                        $data['personThumbnailImage']
+                        $data['personNormalImage']
                     ]) === false) {
                 throw new Exception();
             }
@@ -72,38 +65,26 @@ class person extends mainApi {
     }
 
     public function postMethod($data) {
-        if ($data && !empty($data['personId'])) {    
+//        $errors = $this->validate($data);
+//
+//        if(!empty($errors)) {
+//            die(json_encode($errors));
+//        } 
+//        
+
+        if ($data && !empty($data['personId'])) {
             if ((isset($data['mainPhotoType'])) && ($data['mainPhotoType'] == 'image/jpeg' || $data['mainPhotoType'] == 'image/png')) {
                 $src = $_SERVER['DOCUMENT_ROOT'] . "/uploads/person/" . $data['mainPhotoName'];
-                
-                parent::base64_to_jpeg($data['mainPhotoBase'],
-                        $_SERVER['DOCUMENT_ROOT'] . "/uploads/person//" . $data['mainPhotoName']);
-                
-                parent::cropImage($src, $data['mainPhotoName'],$data['mainPhotoType'] , $data['cropScale'], $data['cropX'], $data['cropY'], $data['cropW'], $data['cropH']);
-            }
-            
 
-//            if (isset($data['thumbnailPhotoType'])) {
-//                $src = $_SERVER['DOCUMENT_ROOT'] . "/uploads/person/" . $data['thumbnailPhotoName'];
-//                
-//                if ($data['thumbnailPhotoType'] == 'image/jpeg' || $data['thumbnailPhotoType'] == 'image/png') {
-//                    parent::base64_to_jpeg($data['thumbnailPhotoBase'],
-//                            $_SERVER['DOCUMENT_ROOT'] . "/uploads/person//" . $data['thumbnailPhotoName']);
-//                    
-//                     parent::cropImage($src, $data['thumbnailPhotoName'], $data['cropScale'], $data['cropX'], $data['cropY'], $data['cropW'], $data['cropH']);
-//                }
-//            }
+                parent::base64_to_jpeg($data['mainPhotoBase'], $_SERVER['DOCUMENT_ROOT'] . "/uploads/person//" . $data['mainPhotoName']);
+
+                parent::cropImage($src, $data['mainPhotoName'], $data['mainPhotoType'], $data['cropScale'], $data['cropX'], $data['cropY'], $data['cropW'], $data['cropH']);
+            }
 
             if (isset($data['mainPhotoName'])) {
                 $columnToUpdate = 'personNormalImage';
                 $this->updatePhoto($data['mainPhotoName'], $data['personId'], $data['oldMain'], $columnToUpdate);
             }
-
-//            if (isset($data['thumbnailPhotoName'])) {
-//                $columnToUpdate = 'personThumbnailImage';
-//                $this->updatePhoto($data['thumbnailPhotoName'], $data['personId'], $data['oldThumbnail'],
-//                        $columnToUpdate);
-//            }
 
             $personUpdateStatement = $this->pdo->prepare(
                     "UPDATE person SET firstName=?, middleName=?, lastName=?, type=?, title=?, specialization=?, interests=?, personInfo=? where id=?");
@@ -158,4 +139,26 @@ class person extends mainApi {
 //            }
         }
     }
+
+    public function validate($data) {
+        $errors = [];
+
+
+        if (isset($data['firstName'])) {
+            if (parent::isEmpty('firstName', $data['firstName'])) {
+                $errors['firstName']['isEmpty'] = true;
+                $errors['firstName']['value'] = $data['firstName'];
+            }
+
+            if (parent::minLength('firstName', $data['firstName'], 5)) {
+                $errors['firstName']['minLength'] = true;
+                $errors['firstName']['value'] = $data['firstName'];
+            }
+        }
+
+
+
+        return $errors;
+    }
+
 }

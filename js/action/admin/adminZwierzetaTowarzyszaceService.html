@@ -10,14 +10,15 @@
 
         <div  class="form-group">
             <label>Nagłówek:</label>
-            <select class="form-control select2 select2-hidden-accessible" name="servicesSmallPetsCategoryId">
+            <select class="form-control select2 select2-hidden-accessible" name="servicesSmallPetsCategoryId" required>
+                <option value="">-- wybierz wartość --</option>
                 {{~it.data.categories: category}}
                 <option {{? it.data.services.servicesSmallPetsCategoryId == category.id }}selected{{?}} value="{{= category.id}}">{{= category.name}}</option>
                 {{~}}
             </select>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" item-name="content">
             <label>Treść:</label>
             <input type="text" class="form-control" placeholder="Treść ..." name="content" value="{{= it.data.services.content || ''}}">
         </div>

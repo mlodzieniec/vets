@@ -1,7 +1,7 @@
 <?php
 
 class functions {
-    
+
     /**
      * Dodanie obrazka do katalogu ze zdjęciami
      * @param string $base64_string Zdjęcie zakodowane w base64
@@ -24,7 +24,7 @@ class functions {
 
         return $output_file;
     }
-    
+
     /**
      * Funkcja służąca do wycięcia stosownego pola obrazka na podstawie zaznaczenia z J'cropa
      * 
@@ -40,7 +40,6 @@ class functions {
     public static function cropImage($src, $name, $type, $scale, $x, $y, $w, $h){
         $quality = 100;
 
-        
         if($type == 'image/jpeg' || $type == 'image/jpg'){
             $img = imagecreatefromjpeg($src);
         } else if($type == 'image/png'){
@@ -49,6 +48,8 @@ class functions {
 
         $dst = ImageCreateTrueColor($w * $scale, $h * $scale);
 
+//        die(var_dump('$dst'));
+        
         imagecopyresampled($dst, $img, 0, 0, $x * $scale, $y * $scale, $w * $scale, $h * $scale, $w * $scale, $h * $scale);
         
 //        $xyz = $_SERVER['DOCUMENT_ROOT'] . "/uploads/person/" . $name;
@@ -62,14 +63,38 @@ class functions {
      * @param string $photoName Nazwa pliku
      * @return string
      */
-     public static function pathToUploadIfExists($directory, $photoName) {
+    public static function pathToUploadIfExists($directory, $photoName) {
         $filePath = '';
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/uploads/". $directory ."/" . $photoName)) {
-            $filePath = "/uploads/". $directory . "/" . $photoName;
+        if (file_exists($_SERVER['DOCUMENT_ROOT'] . "/uploads/" . $directory . "/" . $photoName)) {
+            $filePath = "/uploads/" . $directory . "/" . $photoName;
         }
 
         return $filePath;
+    }
+
+    public static function isEmpty($name, $value) {
+        if (empty($value)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function minLength($name, $value, $amount = 3) {
+        if (strlen($value) < $amount) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function maxLength($name, $value, $amount = 50) {
+        if (strlen($value) > $amount) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

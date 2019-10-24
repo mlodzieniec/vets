@@ -63,7 +63,7 @@ showGalleryById = (id) => {
     }).then((result) => {
         return core.compileLayout('/action/admin/adminGaleriaEdit.html', $(document).find('section[id="content"]'), {data: JSON.parse(result.response)});
     }).then(() => {
-
+        let validate = new validateAdminGallery();
         /*
          * 
          * ZDJĘCIE
@@ -126,6 +126,8 @@ showUploadById = (id) => {
     }).then((result) => {
         return core.compileLayout('/action/admin/adminGalleryUpload.html', $(document).find('section[id="content"]'), {data: JSON.parse(result.response)});
     }).then(() => {
+        let validate = new validateAdminGallery();
+
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();

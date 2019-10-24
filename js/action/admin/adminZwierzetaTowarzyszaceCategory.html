@@ -8,14 +8,15 @@
         <input type="hidden" name="type" value="category">
         <input type="hidden" name="categoryId" value="{{= it.data.id || ''}}">
 
-        <div class="form-group">
+        <div class="form-group" item-name="name">
             <label>Treść:</label>
             <input type="text" class="form-control" placeholder="Treść ..." name="name" value="{{= it.data.name || ''}}">
         </div>
 
         <div  class="form-group">
             <label>Kolejność animacji:</label>
-            <select class="form-control select2 select2-hidden-accessible" name="animationQueue">
+            <select class="form-control select2 select2-hidden-accessible" name="animationQueue" required>
+                <option value="">-- wybierz wartość --</option>
                 <option {{? it.data.animationQueue == 'firstAni' }}selected{{?}} value="firstAni">1</option>
                 <option {{? it.data.animationQueue == 'secondAni' }}selected{{?}} value="secondAni">2</option>
                 <option {{? it.data.animationQueue == 'thirdAni' }}selected{{?}} value="thirdAni">3</option>

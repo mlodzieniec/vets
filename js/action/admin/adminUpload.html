@@ -9,9 +9,9 @@
         <input type="hidden" name="uploadId" value="{{= it.data.upload.id || ''}}">
         <input type="hidden" name="articleId" value="{{= it.data.articleId || ''}}">
 
-        <div class="form-group">
+        <div class="form-group" item-name="title">
             <label>Tytuł:</label>
-            <input type="text" class="form-control" placeholder="Tytuł zdjęcia" name="title" value="{{= it.data.upload.title || ''}}">
+            <input type="text" class="form-control" placeholder="Tytuł zdjęcia" name="title" value="{{= it.data.upload.title || ''}}" required>
         </div>
 
         <div class="form-group">

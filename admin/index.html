@@ -204,7 +204,15 @@
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="/js/libs/doT.min.js"></script>
         <script src="/admin/dist/js/pages/dashboard.js"></script>
-
+        <script src="/js/validate.min.js"></script>
+        <script src="/js/validators.js"></script>
+        <script src="/js/action/admin/validations/validateAdminKadraPerson.js"></script>
+        <script src="/js/action/admin/validations/validateAdminImportantNews.js"></script>
+        <script src="/js/action/admin/validations/validateAdminContact.js"></script>
+        <script src="/js/action/admin/validations/validateAdminGallery.js"></script>
+        <script src="/js/action/admin/validations/validateAdminPorady.js"></script>
+        <script src="/js/action/admin/validations/validateAdminBigPets.js"></script>
+        <script src="/js/action/admin/validations/validateAdminSmallPets.js"></script>
         <script src="/js/jquery.Jcrop.min.js"></script>
         <script src="/js/core.js"></script>
         <script>
@@ -212,6 +220,7 @@
                 document.location.href = document.location.href.replace("/admin", "/admin/");
             }
             let core = new Core();
+            let validators = new Validators();
             core.newRoute();
 
             core.makeXhr({

@@ -112,14 +112,16 @@ class articles extends mainApi {
                 }
             } else if ($data['type'] == 'article') {
                 if ((isset($data['mainPhotoType'])) && ($data['mainPhotoType'] == 'image/jpeg' || $data['mainPhotoType'] == 'image/png')) {
-                    parent::base64_to_jpeg($data['mainPhotoBase'],
-                            $_SERVER['DOCUMENT_ROOT'] . "/uploads/upload/" . $data['mainPhotoName']);
+                    $src = $_SERVER['DOCUMENT_ROOT'] . "/uploads/upload/" . $data['mainPhotoName'];
+
+                    parent::base64_to_jpeg($data['mainPhotoBase'], $_SERVER['DOCUMENT_ROOT'] . "/uploads/upload/" . $data['mainPhotoName']);
+
+                    parent::cropImage($src, $data['mainPhotoName'], $data['mainPhotoType'], $data['cropScale'], $data['cropX'], $data['cropY'], $data['cropW'], $data['cropH']);
                 }
 
                 $data['newUploadId'] = null;
                 if (isset($data['mainPhotoName'])) {
-                    $data['newUploadId'] = $this->insertMainUpload($data['mainPhotoName'], $data['oldUploadId'],
-                            $data['oldUploadName'], $data);
+                    $data['newUploadId'] = $this->insertMainUpload($data['mainPhotoName'], $data['oldUploadId'], $data['oldUploadName'], $data);
                 }
 
 
@@ -185,14 +187,16 @@ class articles extends mainApi {
             }
         } else if ($data && $data['type'] == 'article' && !empty($data['articleId'])) {
             if ((isset($data['mainPhotoType'])) && ($data['mainPhotoType'] == 'image/jpeg' || $data['mainPhotoType'] == 'image/png')) {
-                parent::base64_to_jpeg($data['mainPhotoBase'],
-                        $_SERVER['DOCUMENT_ROOT'] . "/uploads/upload/" . $data['mainPhotoName']);
+                $src = $_SERVER['DOCUMENT_ROOT'] . "/uploads/upload/" . $data['mainPhotoName'];
+
+                parent::base64_to_jpeg($data['mainPhotoBase'], $_SERVER['DOCUMENT_ROOT'] . "/uploads/upload/" . $data['mainPhotoName']);
+
+                parent::cropImage($src, $data['mainPhotoName'], $data['mainPhotoType'], $data['cropScale'], $data['cropX'], $data['cropY'], $data['cropW'], $data['cropH']);
             }
 
             $data['newUploadId'] = $data['oldUploadId'];
             if (isset($data['mainPhotoName'])) {
-                $data['newUploadId'] = $this->insertMainUpload($data['mainPhotoName'], $data['oldUploadId'],
-                        $data['oldUploadName'], $data);
+                $data['newUploadId'] = $this->insertMainUpload($data['mainPhotoName'], $data['oldUploadId'], $data['oldUploadName'], $data);
             }
 
             $articleUpdateStatement = $this->pdo->prepare(
@@ -211,8 +215,7 @@ class articles extends mainApi {
             }
         } else if ($data && $data['type'] == 'upload' && !empty($data['uploadId'])) {
             if ((isset($data['mainPhotoType'])) && ($data['mainPhotoType'] == 'image/jpeg' || $data['mainPhotoType'] == 'image/png')) {
-                $this->base64_to_jpeg($data['mainPhotoBase'],
-                        $_SERVER['DOCUMENT_ROOT'] . "/uploads/upload/" . $data['mainPhotoName']);
+                $this->base64_to_jpeg($data['mainPhotoBase'], $_SERVER['DOCUMENT_ROOT'] . "/uploads/upload/" . $data['mainPhotoName']);
             }
 
             $data['filename'] = $data['oldMain'];

@@ -96,6 +96,8 @@ showCategoryById = (id) => {
     }).then((result) => {
         return core.compileLayout('/action/admin/adminZwierzetaGospodarskieCategory.html', $(document).find('section[id="content"]'), {data: JSON.parse(result.response)});
     }).then(() => {
+        let validate = new validateAdminBigPets();
+
         $('form').on('submit', function (e) {
             e.preventDefault();
 
@@ -122,6 +124,8 @@ showServiceById = (id) => {
     }).then((result) => {
         return core.compileLayout('/action/admin/adminZwierzetaGospodarskieService.html', $(document).find('section[id="content"]'), {data: JSON.parse(result.response)});
     }).then(() => {
+        let validate = new validateAdminBigPets();
+
         CKEDITOR.config.height = 300;
         CKEDITOR.replace('editor1');
 

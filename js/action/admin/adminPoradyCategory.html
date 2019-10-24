@@ -8,17 +8,11 @@
         <input type="hidden" name="type" value="category">
         <input type="hidden" name="categoryId" value="{{= it.data.id || ''}}">
         
-        <div class="form-group">
+        <div class="form-group" item-name="name">
             <label>Nazwa kategorii:</label>
             <input type="text" class="form-control" placeholder="Nazwa kategorii ..." name="name" value="{{= it.data.name || ''}}">
         </div>
-        
-<!--        <div class="form-group">
-            <label>Filtr:</label>
-            <input type="text" class="form-control" placeholder="Nazwa filtra ..." name="filter" value="{{! it.data.filter || ''}}">
-        </div>-->
-
-
+       
         {{? typeof it.data.id !== "undefined"}}
         <button type="submit" class="btn btn-block btn-primary save-form" method="POST">Zapisz</button>
         {{??}}

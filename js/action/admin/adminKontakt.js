@@ -28,6 +28,8 @@ showContactById = (id) => {
     }).then((result) => {
         return core.compileLayout('/action/admin/adminKontaktSingle.html', $(document).find('section[id="content"]'), {data: JSON.parse(result.response)});
     }).then(() => {
+        let validate = new validateAdminContact();
+        
         $('form').on('submit', function (e) {
             e.preventDefault();
 

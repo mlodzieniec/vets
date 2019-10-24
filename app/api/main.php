@@ -21,7 +21,7 @@ class main extends mainApi {
 
         $latestArticleStatement = $latestArticleStatement->fetch();
 
-        $subArticlesStatement = $this->pdo->prepare("Select article.*, upload.filename from article LEFT JOIN upload ON article.mainUploadId = upload.id WHERE article.id not in (Select MAX(id) from article) ORDER BY id DESC");
+        $subArticlesStatement = $this->pdo->prepare("Select article.*, upload.filename from article LEFT JOIN upload ON article.mainUploadId = upload.id WHERE article.id not in (Select MAX(id) from article) ORDER BY id DESC LIMIT 8");
 
         if ($subArticlesStatement->execute() === false) {
             throw new Exception();

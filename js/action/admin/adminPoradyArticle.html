@@ -8,7 +8,7 @@
         <input type="hidden" name="type" value="article">
         <input type="hidden" name="articleId" value="{{= it.data.singleArticle.id || ''}}">
 
-        <div class="form-group">
+        <div class="form-group" item-name="date">
             <label>Data:</label>
             <div class="input-group date">
                 <div class="input-group-addon">
@@ -18,20 +18,20 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" item-name="title">
             <label>Tytuł:</label>
             <input type="text" class="form-control" placeholder="Tytuł ..." name="title" value="{{= it.data.singleArticle.title || ''}}" required>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" item-name="subtitle">
             <label>Podtytuł:</label>
-            <input type="text" class="form-control" placeholder="Podtytuł ..." name="subtitle" value="{{= it.data.singleArticle.subtitle || ''}}" required>
+            <input type="text" class="form-control" placeholder="Podtytuł ..." name="subtitle" value="{{= it.data.singleArticle.subtitle || ''}}">
         </div>
 
         <div class="form-group">
             <label>Kategoria:</label>
-            <select class="form-control select2 select2-hidden-accessible" name="category">
-                <option value="0">-- wybierz kategorię --</option>
+            <select class="form-control select2 select2-hidden-accessible" name="category" required>
+                <option value="">-- wybierz kategorię --</option>
                 {{~it.data.cats: category}}
                 <option {{? it.data.singleArticle.category == category.id }}selected{{?}} value="{{= category.id}}">{{= category.name}}</option>
                 {{~}}

@@ -3,21 +3,21 @@
     <p style="font-style: italic; color: #999999;">Dodawanie/edytowanie pozycji w zakładce "Zwierzęta gospodarskie"</p>
 </div>
 
-<form role="form" id="smallService" enctype="multipart/form-data">
+<form role="form" id="bigService" enctype="multipart/form-data">
     <div class="col-xs-12">
         <input type="hidden" name="type" value="service">
         <input type="hidden" name="serviceId" value="{{= it.data.services.id || ''}}">
 
-        <div  class="form-group">
+        <div class="form-group">
             <label>Nagłówek:</label>
-            <select class="form-control select2 select2-hidden-accessible" name="servicesBigPetsCategoryId">
+            <select class="form-control select2 select2-hidden-accessible" name="servicesBigPetsCategoryId" required>
                 {{~it.data.categories: category}}
                 <option {{? it.data.services.servicesBigPetsCategoryId == category.id }}selected{{?}} value="{{= category.id}}">{{= category.name}}</option>
                 {{~}}
             </select>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" item-name="content">
             <label>Treść:</label>
             <input type="text" class="form-control" placeholder="Treść ..." name="content" value="{{= it.data.services.content || ''}}">
         </div>

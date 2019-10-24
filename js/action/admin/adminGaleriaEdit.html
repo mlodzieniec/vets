@@ -9,9 +9,9 @@
         <input type="hidden" name="galleryId" value="{{= it.data.gallery.id || ''}}">
 
         
-        <div class="form-group">
+        <div class="form-group" item-name="name">
             <label>Nazwa:</label>
-            <input type="text" class="form-control" placeholder="Nazwa ..." name="name" value="{{= it.data.gallery.name || ''}}">
+            <input type="text" class="form-control" placeholder="Nazwa ..." name="name" value="{{= it.data.gallery.name || ''}}" required>
         </div>
     </div>
 

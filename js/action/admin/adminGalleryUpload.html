@@ -9,7 +9,7 @@
         <input type="hidden" name="uploadId" value="{{= it.data.upload.id || ''}}">
         <input type="hidden" name="galleryId" value="{{= it.data.galleryId || ''}}">
 
-        <div class="form-group">
+        <div class="form-group" item-name="title">
             <label>Tytuł:</label>
             <input type="text" class="form-control" placeholder="Tytuł zdjęcia ..." name="title" value="{{= it.data.upload.title || ''}}">
         </div>
@@ -20,7 +20,7 @@
         <div class="form-group">
             <label>Zdjęcie</label>  
             <input type='file' id="main"/>
-            <img id="mainPhoto" src="{{= it.data.upload.filename}}" alt="Zdjęcie do galerii" style="width:100%;max-width:250px;"/>
+            <img id="mainPhoto" src="{{= it.data.upload.filename}}" alt="Zdjęcie do galerii" style="width:100%;max-width:700px;"/>
             <input type='hidden' name='oldMain' value="{{= it.data.upload.filename}}">
         </div>
     </div>

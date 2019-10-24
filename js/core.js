@@ -1,7 +1,6 @@
 /**
  * Class Core
  * @description A simple frontend base for a veterinary website project
- * @author Piotr 'Marcel' Marcula <piotr.marcula.kontakt@gmail.com>
  * @author Oskar 'Swiezu' Golebiewski <osa1022@gmail.com>
  */
 class Core {
@@ -14,6 +13,7 @@ class Core {
     initEvents() {
         $('a').on('click', (e) => {
             $(document).trigger('core.route.start', e);
+            console.debug($(e.target));
             if ($(e.target).attr('action') !== undefined) {
                 e.preventDefault();
                 core.changeUrl($(e.target).attr('href'), $(e.target).attr('action'));
@@ -275,6 +275,16 @@ class Core {
             actionUrl = actionUrl.substring(0, actionUrl.length - 1);
         }
         return actionUrl += ".js";
+    }
+
+    executeFunctionByName(functionName, context /*, args */) {
+        var args = Array.prototype.slice.call(arguments, 2);
+        var namespaces = functionName.split(".");
+        var func = namespaces.pop();
+        for (var i = 0; i < namespaces.length; i++) {
+            context = context[namespaces[i]];
+        }
+        return context[func].apply(context, args);
     }
 
     compileLayout(pathToFile, target, data) {

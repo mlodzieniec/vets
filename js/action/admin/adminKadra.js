@@ -51,12 +51,11 @@ showMemberById = (id) => {
     }).then((result) => {
         return core.compileLayout('/action/admin/adminKadraPerson.html', $(document).find('section[id="content"]'), {data: JSON.parse(result.response)});
     }).then(() => {
+        let validation = new validateAdminKadraPerson();
+        
         $("#main").change(function () {
             readURL(this);
         });
-//        $("#thumbnail").change(function () {
-//            readURL2(this);
-//        });
 
         $('form').on('submit', function (e) {
             e.preventDefault();
@@ -88,43 +87,63 @@ showMemberById = (id) => {
                 }
             }
 
-//            function thumbnailPhotoToBase() {
-//                const file2 = document.querySelector('#thumbnail').files[0];
-//                if (typeof file2 !== 'undefined') {
-//                    data.thumbnailPhotoName = file2.name;
-//                    data.thumbnailPhotoType = file2.type;
-//                    var base64File2 = toBase64(file2);
-//
-//                    return base64File2;
-//                } else {
-//                    return Promise.resolve('');
-//
-//                }
-//            }
-
             mainPhotoToBase().then(function (base64File) {
                 data.mainPhotoBase = base64File;
                 data.cropScale = imgScale(base64File);
 
-//                thumbnailPhotoToBase().then(function (base64File2) {
-//                    data.thumbnailPhotoBase = base64File2;
-//                    data.cropScale = imgScale(base64File2);
+                    core.makeXhr({
+                        method: $(e.target).find('.save-form').attr('method'),
+                        url: 'api/admin/person',
+                        params: data
+                    }).then((e) => {
+//                        if (e.response) {
+//                            var errors = JSON.parse(e.response);
+//                            console.log(errors);
+//
+//                            for (var key in errors) {
+//                                // skip loop if the property is from prototype
+//                                if (!errors.hasOwnProperty(key))
+//                                    continue;
+//
+//                                var obj = errors[key];
+//                                for (var prop in obj) {
+//                                    // skip loop if the property is from prototype
+//                                    if (!obj.hasOwnProperty(prop))
+//                                        continue;
+//
+//                                    // your code
+////                                    console.log(key, obj['value']);
+//
+////                                    console.log(prop);
+////                                    if (prop != 'value') {
+////                                        core.executeFunctionByName(`validators.${prop}`, key, obj['value'], 5);
+////                                    }
+////                                    executeFunctionByName(`validators.${prop}`, key, obj['value']);
+//
+//                                    validators.isEmpty(key, obj['value']);
+//                                    validators.minLength(key, obj['value'], 5);
+////                                    console.log(key);
+////                                    console.log(obj['value']);
+////                                    alert(prop + " = " + obj[prop]);
+//                                }
+//                            }
+//                        }
 
-                core.makeXhr({
-                    method: $(e.target).find('.save-form').attr('method'),
-                    url: 'api/admin/person',
-                    params: data
-                }).then(() => {
+                        core.changeUrl(window.location.origin + window.location.pathname);
+                        window.location.reload(true);
+                    });
+//                core.makeXhr({
+//                    method: $(e.target).find('.save-form').attr('method'),
+//                    url: 'api/admin/person',
+//                    params: data
+//                }).then(() => {
 //                        core.changeUrl(window.location.origin + window.location.pathname);
 //                        window.location.reload(true);
-                });
-
 //                });
             });
         });
     });
 };
-
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -134,32 +153,14 @@ function readURL(input) {
             $('#mainPhoto').attr('src', e.target.result);
             $('#mainPhoto').Jcrop({
                 onSelect: imageCoords,
-                aspectRatio: 1 / 1.75
+                aspectRatio: 1 / 1.75,
+                setSelect: [0, 100, 0, 0]
             });
         };
 
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-//function readURL2(input) {
-//    if (input.files && input.files[0]) {
-//        var reader = new FileReader();
-//
-//        reader.onload = function (e) {
-//            $('#thumbnailPhoto').attr('src', e.target.result);
-//
-//            $('#thumbnailPhoto').on('load', function () {
-//                $('#thumbnailPhoto').Jcrop({
-//                    onSelect: imageCoords,
-//                    aspectRatio: 1 / 1
-//                });
-//            });
-//        };
-//
-//        reader.readAsDataURL(input.files[0]);
-//    }
-//}
 
 /*
  * Funkcja zwraca wymiary obrazka na podstawie zakodowanego zdjecia w base64
@@ -168,7 +169,7 @@ function imgScale(base64file) {
     var image = new Image();
     image.src = base64file;
 
-    var width = 200;
+    var width = $(document).find('#mainPhoto').width();
     var imgW = image.naturalWidth || image.width;
 
     var scale = imgW / width;
@@ -183,3 +184,4 @@ function imageCoords(c) {
     croppedImage.cropH = c.h;
 }
 ;
+

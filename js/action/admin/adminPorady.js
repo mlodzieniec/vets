@@ -10,6 +10,8 @@ function actionRun() {
     }
 }
 
+var croppedImage = {};
+
 showAll = () => {
     core.makeXhr({
         method: 'GET',
@@ -97,6 +99,8 @@ showCategoryById = (id) => {
     }).then((result) => {
         return core.compileLayout('/action/admin/adminPoradyCategory.html', $(document).find('section[id="content"]'), {data: JSON.parse(result.response)});
     }).then(() => {
+        let validate = new validateAdminPorady();
+
         $('form').on('submit', function (e) {
             e.preventDefault();
 
@@ -125,24 +129,13 @@ showArticleById = (id) => {
             core.compileLayout('/action/admin/adminPoradyArticle.html', $(document).find('section[id="content"]'), {data: JSON.parse(result.response)}),
             Promise.resolve(JSON.parse(result.response))
         ]);
-
     }).then(([content, data]) => {
+        let validate = new validateAdminPorady();
+
         $("#datepicker").datepicker({format: 'yyyy-mm-dd'});
 
         CKEDITOR.config.height = 300;
         CKEDITOR.replace('editor1');
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#mainPhoto').attr('src', e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
 
         $("#main").change(function () {
             readURL(this);
@@ -189,6 +182,8 @@ showArticleById = (id) => {
             var $form = $('form');
             var data = core.getFormData($form);
 
+            $.extend(data, croppedImage);
+
             const toBase64 = file => new Promise((resolve, reject) => {
                     const reader = new FileReader();
                     reader.readAsDataURL(file);
@@ -213,14 +208,15 @@ showArticleById = (id) => {
 
             mainPhotoToBase().then(function (base64File) {
                 data.mainPhotoBase = base64File;
+                data.cropScale = imgScale(base64File);
 
                 core.makeXhr({
                     method: $(e.target).find('.save-form').attr('method'),
                     url: 'api/admin/articles',
                     params: data
                 }).then(() => {
-                core.changeUrl(window.location.origin + window.location.pathname);
-                window.location.reload(true);
+                    core.changeUrl(window.location.origin + window.location.pathname);
+                    window.location.reload(true);
                 });
             });
 
@@ -235,7 +231,9 @@ showUploadById = (id) => {
     }).then((result) => {
         return core.compileLayout('/action/admin/adminUpload.html', $(document).find('section[id="content"]'), {data: JSON.parse(result.response)});
     }).then(() => {
-        function readURL(input) {
+        let validate = new validateAdminPorady();
+
+        function readURL2(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
@@ -287,10 +285,50 @@ showUploadById = (id) => {
                     url: 'api/admin/articles',
                     params: data
                 }).then(() => {
-                core.changeUrl(window.location.origin + window.location.pathname);
-                window.location.reload(true);
+                    core.changeUrl(window.location.origin + window.location.pathname);
+                    window.location.reload(true);
                 });
             });
         });
     });
 };
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#mainPhoto').attr('src', e.target.result);
+            $('#mainPhoto').Jcrop({
+                onSelect: imageCoords,
+                aspectRatio: 3 / 2,
+                setSelect: [0, 100, 100, 0]
+            });
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+/*
+ * Funkcja zwraca wymiary obrazka na podstawie zakodowanego zdjecia w base64
+ */
+function imgScale(base64file) {
+    var image = new Image();
+    image.src = base64file;
+
+    var width = $(document).find('#mainPhoto').width();
+    var imgW = image.naturalWidth || image.width;
+
+    var scale = imgW / width;
+
+    return scale;
+}
+
+function imageCoords(c) {
+    croppedImage.cropX = c.x;
+    croppedImage.cropY = c.y;
+    croppedImage.cropW = c.w;
+    croppedImage.cropH = c.h;
+}
+
