@@ -1,3 +1,9 @@
+#content:not(.admin) {
+    margin-bottom: 0px;
+    background-image: url('../images/background.jpg');
+    min-height: 578px;
+}
+
 a.nav-link.mainButton {
     color: black;
     -webkit-transition: color 1s;
@@ -739,10 +745,8 @@ img.smallPhotoBorder, a.smallPhotoBorder, div.smallPhotoBorder {
     background-color: white;
     box-shadow: 2px 5px 15px #b5b5b5;
     border: 1px solid rgba(0,0,0,.125);
-    border-radius: 5rem;
-    /*padding: 30px;*/
+    border-radius: 3rem;
     padding: 30px 20px !important;
-    /*margin: 0 !important;*/
 }
 
 .div-shadows {

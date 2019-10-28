@@ -1,59 +1,108 @@
 <form role="form" id="person" enctype="multipart/form-data" runat="server">
-    <div class="col-md-6">
-        <input type="hidden" name="personId" value="{{= it.data.id || ''}}">
+    <div class="box-header" style="text-align: center;"> 
+        <h1 class="">Informacje podstawowe</h1> 
+        <p style="font-style: italic; color: #999999;">W poniższych polach proszę podstawowe informacje na temat członka zespołu.</p>
+    </div>
 
-        <div class="form-group" item-name="firstName">
-            <label>Imię:</label>
-            <input type="text" class="form-control" placeholder="Imię ..." name="firstName" value="{{= it.data.firstName || ''}}" required>
+    <div class="row">
+        <div class="col-md-6">
+            <input type="hidden" name="personId" value="{{= it.data.id || ''}}">
+
+            <div class="form-group" item-name="firstName">
+                <label>Imię:</label>
+                <input type="text" class="form-control" placeholder="Imię ..." name="firstName" value="{{= it.data.firstName || ''}}" required>
+            </div>
+
+            <div class="form-group" item-name="middleName">
+                <label>Drugie imię:</label>
+                <input type="text" class="form-control" placeholder="Drugie imię ..." name="middleName" value="{{= it.data.middleName || ''}}">
+            </div>
+
+            <div class="form-group">
+                <label>Nazwisko:</label>
+                <input type="text" class="form-control" placeholder="Nazwisko ..." name="lastName" value="{{= it.data.lastName || ''}}" required>
+            </div>
+
+            <div  class="form-group">
+                <label>Typ pracownika:</label>
+                <select class="form-control select2 select2-hidden-accessible" name="type" required>
+                    <option {{? it.data.type == 'lekarz' }}selected{{?}} value="lekarz">Lekarz</option>
+                    <option {{? it.data.type == 'pomocnik' }}selected{{?}} value="pomocnik">Pomocnik</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tytuł:</label>
+                <input type="text" class="form-control" placeholder="Tytuł ..." name="title" value="{{= it.data.title || ''}}">
+            </div>
+
+            <div class="form-group">
+                <label>Specjalizacja:</label>
+                <input type="text" class="form-control" placeholder="Specjalizacja ..."name="specialization" value="{{= it.data.specialization || ''}}">
+            </div>
+
+            <div class="form-group">
+                <label>Zainteresowania:</label>
+                <input type="text" class="form-control" placeholder="Zainteresowania ..." name="interests" value="{{= it.data.interests || ''}}">
+            </div>
+
+            <div class="form-group">
+                <label>O lekarzu:</label>
+                <textarea class="form-control" placeholder="O lekarzu ..." rows="5" name="personInfo">{{= it.data.personInfo || ''}}</textarea>
+            </div>
+
         </div>
 
-        <div class="form-group" item-name="middleName">
-            <label>Drugie imię:</label>
-            <input type="text" class="form-control" placeholder="Drugie imię ..." name="middleName" value="{{= it.data.middleName || ''}}">
-        </div>
-
-        <div class="form-group">
-            <label>Nazwisko:</label>
-            <input type="text" class="form-control" placeholder="Nazwisko ..." name="lastName" value="{{= it.data.lastName || ''}}" required>
-        </div>
-
-        <div  class="form-group">
-            <label>Typ pracownika:</label>
-            <select class="form-control select2 select2-hidden-accessible" name="type" required>
-                <option {{? it.data.type == 'lekarz' }}selected{{?}} value="lekarz">Lekarz</option>
-                <option {{? it.data.type == 'pomocnik' }}selected{{?}} value="pomocnik">Pomocnik</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Tytuł:</label>
-            <input type="text" class="form-control" placeholder="Tytuł ..." name="title" value="{{= it.data.title || ''}}">
-        </div>
-
-        <div class="form-group">
-            <label>Specjalizacja:</label>
-            <input type="text" class="form-control" placeholder="Specjalizacja ..."name="specialization" value="{{= it.data.specialization || ''}}">
-        </div>
-
-        <div class="form-group">
-            <label>Zainteresowania:</label>
-            <input type="text" class="form-control" placeholder="Zainteresowania ..." name="interests" value="{{= it.data.interests || ''}}">
-        </div>
-
-        <div class="form-group">
-            <label>O lekarzu:</label>
-            <textarea class="form-control" placeholder="O lekarzu ..." rows="5" name="personInfo">{{= it.data.personInfo || ''}}</textarea>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Zdjęcie:</label>  
+                <input type='file' id="main"/>
+                <img id="mainPhoto" name="mainPhoto" src="{{= it.data.personNormalImage}}" alt="Zdjęcie osoby" style="width:100%;max-width:400px;"/>
+                <input type='hidden' name='oldMain' value="{{= it.data.personNormalImage}}">
+            </div>
         </div>
 
     </div>
 
-    <div class="col-md-6">
-        <div class="form-group">
-            <label>Zdjęcie:</label>  
-            <input type='file' id="main"/>
-            <img id="mainPhoto" name="mainPhoto" src="{{= it.data.personNormalImage}}" alt="Zdjęcie osoby" style="width:100%;max-width:400px;"/>
-            <input type='hidden' name='oldMain' value="{{= it.data.personNormalImage}}">
+    <div class="box-header" style="text-align: center;"> 
+        <h1 class="">Godziny pracy</h1> 
+        <p style="font-style: italic; color: #999999;">W poniższych polach proszę uzupełnić godziny pracy.</p>
+    </div>
+
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group" item-name="mondayHours">
+                <label>Poniedziałek:</label>
+                <input type="text" class="form-control" placeholder="Na przykład: 08:00-16:00..." name="mondayHours" value="{{= it.data.mondayHours || ''}}">
+            </div>
+            <div class="form-group" item-name="tuesdayHours">
+                <label>Wtorek:</label>
+                <input type="text" class="form-control" placeholder="Na przykład:  08:00-16:00..." name="tuesdayHours" value="{{= it.data.tuesdayHours || ''}}">
+            </div>
+            <div class="form-group" item-name="wednesdayHours">
+                <label>Środa:</label>
+                <input type="text" class="form-control" placeholder="Na przykład:  08:00-16:00..." name="wednesdayHours" value="{{= it.data.wednesdayHours || ''}}">
+            </div>
+            <div class="form-group" item-name="thursdayHours">
+                <label>Czwartek:</label>
+                <input type="text" class="form-control" placeholder="Na przykład:  08:00-16:00..." name="thursdayHours" value="{{= it.data.thursdayHours || ''}}">
+            </div>
+            <div class="form-group" item-name="fridayHours">
+                <label>Piątek:</label>
+                <input type="text" class="form-control" placeholder="Na przykład:  08:00-16:00..." name="fridayHours" value="{{= it.data.fridayHours || ''}}">
+            </div>
+            <div class="form-group" item-name="saturdayHours">
+                <label>Sobota:</label>
+                <input type="text" class="form-control" placeholder="Na przykład:  08:00-16:00..." name="saturdayHours" value="{{= it.data.saturdayHours || ''}}">
+            </div>
+            <div class="form-group" item-name="sundayHours">
+                <label>Niedziela:</label>
+                <input type="text" class="form-control" placeholder="Na przykład:  08:00-16:00..." name="sundayHours" value="{{= it.data.sundayHours || ''}}">
+            </div>
         </div>
+        
+
     </div>
 
     {{? typeof it.data.id !== "undefined"}}

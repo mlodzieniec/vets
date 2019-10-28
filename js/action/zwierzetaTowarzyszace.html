@@ -1,12 +1,12 @@
 <div class="content-wrap" style="padding: 30px 0px 0px 0px;">
     <div class="container clearfix content-full-width" style="margin-bottom: 30px;">
         {{~ it.data.cats : category}}
-        <div id="{{= category.animationQueue}}" class="col_full" >
-            <div class="heading-block fancy-title nobottomborder title-bottom-border">
+        <div id="{{= category.animationQueue}}" class="col_full nobottommargin" >
+            <div class="heading-block fancy-title nobottomborder title-bottom-border nobottommargin">
                 <h3><span>{{= category.name.charAt(0)}}</span>{{= category.name.substring(1)}}:</h3>
             </div>
 
-            <ul class="iconlist nobottommargin" style="line-height:40px;padding: 0px 20px 20px 20px;">
+            <ul class="iconlist nobottommargin" style="line-height:26px;padding:20px;">
                 {{~ it.data.content : content}}
                 {{? content.servicesSmallPetsCategoryId == category.id}}   
                 

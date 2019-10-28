@@ -46,7 +46,7 @@ class person extends mainApi {
             }
 
             $personPutStatement = $this->pdo->prepare(
-                    "INSERT INTO person (firstName, middleName, lastName, type, title, specialization, interests, personInfo, personNormalImage) VALUES (?,?,?,?,?,?,?,?,?)");
+                    "INSERT INTO person (firstName, middleName, lastName, type, title, specialization, interests, personInfo, mondayHours, tuesdayhours, wednesdayHours, thursdayHours, fridayHours, saturdayHours, sundayHours, personNormalImage) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
             if ($personPutStatement->execute([
                         $data['firstName'],
@@ -57,7 +57,14 @@ class person extends mainApi {
                         $data['specialization'],
                         $data['interests'],
                         $data['personInfo'],
-                        $data['personNormalImage']
+                        $data['mondayHours'],
+                        $data['tuesdayHours'],
+                        $data['wednesdayHours'],
+                        $data['thursdayHours'],
+                        $data['fridayHours'],
+                        $data['saturdayHours'],
+                        $data['sundayHours'],
+                        $data['personNormalImage'],
                     ]) === false) {
                 throw new Exception();
             }
@@ -87,7 +94,11 @@ class person extends mainApi {
             }
 
             $personUpdateStatement = $this->pdo->prepare(
-                    "UPDATE person SET firstName=?, middleName=?, lastName=?, type=?, title=?, specialization=?, interests=?, personInfo=? where id=?");
+                    "UPDATE person SET firstName=?, middleName=?, lastName=?, "
+                    . "type=?, title=?, specialization=?, interests=?, personInfo=?, "
+                    . "mondayHours=?, tuesdayHours=?, wednesdayHours=?, "
+                    . "thursdayHours=?, fridayHours=?, saturdayHours=?, sundayHours=? "
+                    . "where id=?");
 
             if ($personUpdateStatement->execute([
                         $data['firstName'],
@@ -98,6 +109,13 @@ class person extends mainApi {
                         $data['specialization'],
                         $data['interests'],
                         $data['personInfo'],
+                        $data['mondayHours'],
+                        $data['tuesdayHours'],
+                        $data['wednesdayHours'],
+                        $data['thursdayHours'],
+                        $data['fridayHours'],
+                        $data['saturdayHours'],
+                        $data['sundayHours'],
                         $data['personId']
                     ]) === false) {
                 throw new Exception();
